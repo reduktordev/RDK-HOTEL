@@ -11,7 +11,7 @@ import {
 import Image from 'next/image'
 import Footer from '@/app/components/Footer'
 import Link from 'next/link'
-import { rooms } from '../page'
+import { rooms } from '@/data/rooms' // Impor rooms dari src/data/rooms.ts
 import toast, { Toaster } from 'react-hot-toast' // Untuk popup
 import { useParams } from 'next/navigation' // Import useParams dari next/navigation
 

@@ -101,28 +101,32 @@ const rooms: Room[] = [
 
 const amenitiesList = [
   {
-    icon: <FiWifi />,
+    icon: <FiWifi className='text-amber-600 text-xl' />,
     title: 'High-Speed WiFi',
     description: 'Fiber-optic internet access'
   },
   {
-    icon: <FiCoffee />,
+    icon: <FiCoffee className='text-amber-600 text-xl' />,
     title: 'Premium Coffee',
     description: 'Nespresso machine & selection'
   },
   {
-    icon: <FiZap />,
+    icon: <FiZap className='text-amber-600 text-xl' />,
     title: 'Smart Room',
     description: 'iPad room control system'
   },
-  { icon: <FiGrid />, title: 'Workspace', description: 'Ergonomic desk setup' },
   {
-    icon: <FiStar />,
+    icon: <FiGrid className='text-amber-600 text-xl' />,
+    title: 'Workspace',
+    description: 'Ergonomic desk setup'
+  },
+  {
+    icon: <FiStar className='text-amber-600 text-xl' />,
     title: 'Luxury Toiletries',
     description: 'Bulgari bath amenities'
   },
   {
-    icon: <FiUsers />,
+    icon: <FiUsers className='text-amber-600 text-xl' />,
     title: '24/7 Service',
     description: 'Personal concierge'
   }
@@ -189,6 +193,7 @@ export default function RoomsPage () {
       <section className='py-16 bg-white'>
         <div className='max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
           {rooms
+            .slice() // Buat salinan array untuk menghindari mutasi
             .sort((a, b) => {
               if (sortBy === 'price') return a.price - b.price
               if (sortBy === 'size') return parseInt(a.size) - parseInt(b.size)
@@ -265,9 +270,7 @@ export default function RoomsPage () {
                 className='bg-white p-6 rounded-xl shadow-md'
               >
                 <div className='w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4'>
-                  {React.cloneElement(amenity.icon, {
-                    className: 'text-amber-600 text-xl'
-                  })}
+                  {amenity.icon}
                 </div>
                 <h3 className='text-xl font-semibold mb-2'>{amenity.title}</h3>
                 <p className='text-gray-600'>{amenity.description}</p>
@@ -281,4 +284,3 @@ export default function RoomsPage () {
     </div>
   )
 }
-export { rooms } 
