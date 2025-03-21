@@ -2,6 +2,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    serverActions: true, // jika kamu pakai fitur ini
+  },
   images: {
     remotePatterns: [
       {
