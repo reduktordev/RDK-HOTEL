@@ -1,9 +1,12 @@
 // next.config.js
 import type { NextConfig } from "next";
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   experimental: {
-    serverActions: true, // jika kamu pakai fitur ini
+    serverActions: {
+      bodySizeLimit: '1mb', // example value
+      allowedOrigins: ['*'], // example value
+    }, // jika kamu pakai fitur ini
   },
   images: {
     remotePatterns: [
