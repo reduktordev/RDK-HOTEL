@@ -1,7 +1,7 @@
 // next.config.js
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const NextConfig = {
   experimental: {
     serverActions: {
       bodySizeLimit: '1mb', // example value
