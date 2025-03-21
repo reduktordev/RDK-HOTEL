@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
         hostname: 'localhost',
         port: '3000',
         pathname: '/images/**',
-      }
+      },
     ],
   },
   // Optional: Tambahkan fitur lain
