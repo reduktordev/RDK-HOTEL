@@ -1,7 +1,7 @@
 // next.config.js
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   experimental: {
     serverActions: true, // jika kamu pakai fitur ini
   },
