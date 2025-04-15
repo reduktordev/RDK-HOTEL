@@ -14,7 +14,7 @@ import {
   FiZap
 } from 'react-icons/fi'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 type Room = {
   id: number
@@ -131,6 +131,13 @@ const amenitiesList = [
     description: 'Personal concierge'
   }
 ]
+
+const dateInputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    dateInputRef.current?.showPicker?.(); // showPicker is supported in most modern browsers
+    dateInputRef.current?.focus(); // fallback
+  };
 
 export default function RoomsPage () {
   const [sortBy, setSortBy] = useState('price')

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   FiCheck,
   FiUsers,
@@ -54,6 +54,13 @@ export default function RoomDetail () {
       position: 'top-center'
     })
   }
+
+  const dateInputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    dateInputRef.current?.showPicker?.(); // showPicker is supported in most modern browsers
+    dateInputRef.current?.focus(); // fallback
+  };
 
   return (
     <div className='min-h-screen flex flex-col'>
@@ -129,10 +136,11 @@ export default function RoomDetail () {
                   <label className='block mb-2 text-gray-700'>
                     Check-in Date
                   </label>
-                  <div className='relative'>
+                  <div className='relative' onClick={handleClick}>
                     <input
                       type='date'
                       className='w-full p-3 border rounded-lg focus:ring-2 focus:ring-amber-500'
+                      ref={dateInputRef}
                       value={bookingData.checkIn}
                       onChange={e =>
                         setBookingData({
@@ -142,7 +150,6 @@ export default function RoomDetail () {
                       }
                       required
                     />
-                    <FiCalendar className='absolute right-3 top-3.5 text-gray-400' />
                   </div>
                 </div>
 
@@ -150,10 +157,11 @@ export default function RoomDetail () {
                   <label className='block mb-2 text-gray-700'>
                     Check-out Date
                   </label>
-                  <div className='relative'>
+                  <div className='relative' onClick={handleClick}>
                     <input
                       type='date'
                       className='w-full p-3 border rounded-lg focus:ring-2 focus:ring-amber-500'
+                      ref={dateInputRef}
                       value={bookingData.checkOut}
                       onChange={e =>
                         setBookingData({
@@ -163,7 +171,6 @@ export default function RoomDetail () {
                       }
                       required
                     />
-                    <FiCalendar className='absolute right-3 top-3.5 text-gray-400' />
                   </div>
                 </div>
               </div>
