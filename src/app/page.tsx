@@ -17,8 +17,10 @@ import {
     FiArrowLeft,
     FiX,
     FiCalendar,
+    FiCreditCard,
+    FiUser,
 } from "react-icons/fi";
-import React from "react";
+import React, { useRef } from "react";
 
 import { Dialog } from "@headlessui/react";
 import { useState } from "react";
@@ -173,6 +175,18 @@ export default function Home() {
     const handleClick = () => {
         router.push("/rooms");
     };
+
+    const [isBooking1Open, setIsBooking1Open] = useState(false);
+
+    const dateInputRef = useRef<HTMLInputElement>(null);
+    
+        const handleClickDate = () => {
+            dateInputRef.current?.showPicker?.(); // showPicker is supported in most modern browsers
+            dateInputRef.current?.focus(); // fallback
+        };
+    
+    
+        
     return (
         <div className="min-h-screen">
             <Header />
@@ -183,7 +197,7 @@ export default function Home() {
                         src="/images/hero-bg.jpg"
                         alt="RDK Hotel"
                         fill
-                        className="object-cover"
+                        className="object-cover brightness-50"
                         priority
                         sizes="100vw"
                     />
@@ -228,16 +242,160 @@ export default function Home() {
                             the heart of the metropolis.
                         </p>
 
-                        <div className="flex gap-4 flex-wrap">
+                        <div className="flex gap-4 flex-wrap w-full">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                onClick={() => setIsBooking1Open(true)}
+                                className="bg-amber-500 hover:bg-amber-600 px-8 py-3 rounded-xl flex items-center gap-2 text-lg transition-all">
+                                Book Now
+                            </motion.button>
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 onClick={handleClick}
-                                className="bg-amber-500 hover:bg-amber-600 px-8 py-4 rounded-full flex items-center gap-2 text-lg transition-all">
-                                Book Now <FiArrowRight />
+                                className="border border-amber-500 text-amber-500 hover:bg-amber-500/10 px-8 py-3 rounded-xl flex items-center gap-2 transition-all">
+                                Learn More <FiArrowRight />
                             </motion.button>
                         </div>
                     </motion.div>
                 </div>
+
+                <Dialog
+                    open={isBooking1Open}
+                    onClose={() => setIsBooking1Open(false)}
+                    className="relative z-50">
+                    <div
+                        className="fixed inset-0 bg-black/30 backdrop-blur-sm"
+                        aria-hidden="true"
+                    />
+
+                    <div className="fixed inset-0 flex items-center justify-center p-4">
+                        <Dialog.Panel className="w-full max-w-2xl rounded-2xl bg-white p-8 shadow-xl">
+                            <div className="flex justify-between items-start mb-6">
+                                <Dialog.Title className="text-2xl font-bold text-gray-800">
+                                    Make a Reservation
+                                </Dialog.Title>
+                                <button
+                                    onClick={() => setIsBooking1Open(false)}
+                                    className="text-gray-400 hover:text-gray-600">
+                                    <FiX size={24} />
+                                </button>
+                            </div>
+
+                            <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Check-in Date */}
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Check-in Date{" "}
+                                            <span className="text-amber-600">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div
+                                            className="relative cursor-pointer"
+                                            onClick={handleClickDate}>
+                                            <input
+                                                type="date"
+                                                ref={dateInputRef}
+                                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 appearance-none"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Adults */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Adults{" "}
+                                            <span className="text-amber-600">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div className="relative">
+                                            <select
+                                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                                required>
+                                                <option value="1">
+                                                    1 Adult
+                                                </option>
+                                                <option value="2">
+                                                    2 Adults
+                                                </option>
+                                                <option value="3">
+                                                    3 Adults
+                                                </option>
+                                                <option value="4">
+                                                    4 Adults
+                                                </option>
+                                            </select>
+                                            <FiUser className="absolute right-3 top-3.5 text-gray-400" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Check-out Date */}
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Check-out Date{" "}
+                                            <span className="text-amber-600">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div
+                                            className="relative cursor-pointer"
+                                            onClick={handleClick}>
+                                            <input
+                                                type="date"
+                                                ref={dateInputRef}
+                                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 appearance-none"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Room Type */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Room Type{" "}
+                                            <span className="text-amber-600">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div className="relative">
+                                            <select
+                                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                                required>
+                                                <option value="">
+                                                    Select Room
+                                                </option>
+                                                <option value="executive">
+                                                    Executive Suite
+                                                </option>
+                                                <option value="presidential">
+                                                    Presidential Suite
+                                                </option>
+                                                <option value="honeymoon">
+                                                    Honeymoon Suite
+                                                </option>
+                                            </select>
+                                            <FiCreditCard className="absolute right-3 top-3.5 text-gray-400" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Submit Button */}
+                                <div className="md:col-span-2">
+                                    <button
+                                        type="submit"
+                                        className="w-full bg-amber-600 text-white py-3 px-6 rounded-lg hover:bg-amber-700 transition-colors">
+                                        Check Availability
+                                    </button>
+                                </div>
+                            </form>
+                        </Dialog.Panel>
+                    </div>
+                </Dialog>
             </section>
             {/* Stats Section */}
             <section className="bg-amber-50 py-16">
