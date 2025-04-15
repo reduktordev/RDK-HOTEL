@@ -132,12 +132,7 @@ const amenitiesList = [
   }
 ]
 
-const dateInputRef = useRef<HTMLInputElement>(null);
 
-  const handleClick = () => {
-    dateInputRef.current?.showPicker?.(); // showPicker is supported in most modern browsers
-    dateInputRef.current?.focus(); // fallback
-  };
 
 export default function RoomsPage () {
   const [sortBy, setSortBy] = useState('price')
